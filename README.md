@@ -12,13 +12,29 @@ Vercel Telegram 消息推送机器人
 
 
 ## 使用
-发送消息
+
+### GET 请求
 ```
-curl -X GET http://<your_url>/api/notify?u=123&m=HelloWorld
+curl -X GET "http://<your_url>/api/notify?u=123&m=HelloWorld"
 ```
 
-路由参数说明
+### POST 请求
+```
+curl -X POST "http://<your_url>/api/notify?u=123" \
+  -H "Content-Type: application/json" \
+  -d '{"title": "标题", "body": "内容"}'
+```
+
+或在 JSON body 中指定用户 ID：
+```
+curl -X POST "http://<your_url>/api/notify" \
+  -H "Content-Type: application/json" \
+  -d '{"title": "标题", "body": "内容", "u": 123}'
+```
+
+### 路由参数说明
 
 | url 路径   | 参数（类型, 说明）        | 说明         |
 | ---------- | ---------------------- | ------------ |
 | api/notify | m(消息内容)，u(telegram用户id) | 发送文字消息 |
+| api/notify | JSON body: title, body, u | POST请求发送消息 |
